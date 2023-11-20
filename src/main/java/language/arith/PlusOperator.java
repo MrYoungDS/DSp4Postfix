@@ -20,6 +20,6 @@ public class PlusOperator extends BinaryOperator<Integer> {
             throw new IllegalStateException("Could not perform operation prior to operands being set.");
         }
         Integer result = op0.getValue() + op1.getValue();
-        return new Operand<Integer>(result);
+        return new Operand<>(result);
     }
 }

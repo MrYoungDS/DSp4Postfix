@@ -41,6 +41,15 @@ public class LinkedStack<T> implements StackInterface<T> {
      * {@inheritDoc}.
      */
     @Override
+    public void push(T elem) {
+        // TODO: Implement the push method, which will be
+        //   similar to the addFirst method for a LinkedList.
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -51,14 +60,5 @@ public class LinkedStack<T> implements StackInterface<T> {
     @Override
     public int size() {
         return size;
-    }
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Override
-    public void push(T elem) {
-        // TODO: Implement the push method, which will be
-        //   similar to the addFirst method for a LinkedList.
     }
 }
