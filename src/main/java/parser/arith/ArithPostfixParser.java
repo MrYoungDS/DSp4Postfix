@@ -11,11 +11,11 @@ import language.arith.MultOperator;
 import language.arith.NegateOperator;
 import language.arith.PlusOperator;
 import language.arith.SubOperator;
-import parser.PostFixParser;
+import parser.PostfixParser;
 
 /**
  * <p>
- * An {@code ArithPostFixParser} is a post fix parser for arithmetic
+ * An {@code ArithPostFixParser} is a postfix parser for arithmetic
  * expressions.
  * </p>
  * <p>
@@ -41,7 +41,7 @@ import parser.PostFixParser;
  *
  * @author jcollard, jddevaug
  */
-public class ArithPostFixParser implements PostFixParser<Integer> {
+public class ArithPostfixParser implements PostfixParser<Integer> {
 
     // TONOTDO: please do not edit this class
 
@@ -51,7 +51,7 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
 
     private static final Map<String, OperatorConstructor> operators;
 
-    private static boolean isParseable(String expr) {
+    private static boolean isParsable(String expr) {
         Scanner s = new Scanner(expr);
         while (s.hasNext()) {
             // If we find an integer, we are good.
@@ -60,7 +60,7 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
                 continue;
             }
             String token = s.next();
-            // If we find a string that is not an operator
+            // If we find a string that is not an operator,
             // return false
             if (!operators.containsKey(token)) {
                 s.close();
@@ -68,15 +68,14 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
             }
         }
         s.close();
-        // If we make it to the end of the expression we are good
+        // If we make it to the end of the expression, we are good
         return true;
     }
 
     static {
-        operators = new HashMap<String, ArithPostFixParser.OperatorConstructor>();
+        operators = new HashMap<>();
 
         operators.put("+", new OperatorConstructor() {
-
             @Override
             public Operator<Integer> construct() {
                 return new PlusOperator();
@@ -84,7 +83,6 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
         });
 
         operators.put("*", new OperatorConstructor() {
-
             @Override
             public Operator<Integer> construct() {
                 return new MultOperator();
@@ -92,7 +90,6 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
         });
 
         operators.put("-", new OperatorConstructor() {
-
             @Override
             public Operator<Integer> construct() {
                 return new SubOperator();
@@ -100,7 +97,6 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
         });
 
         operators.put("/", new OperatorConstructor() {
-
             @Override
             public Operator<Integer> construct() {
                 return new DivOperator();
@@ -108,7 +104,6 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
         });
 
         operators.put("!", new OperatorConstructor() {
-
             @Override
             public Operator<Integer> construct() {
                 return new NegateOperator();
@@ -122,20 +117,20 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
     private Operator<Integer> nextOperator;
 
     /**
-     * Creates an {@link ArithPostFixParser} over {@code expr}.
+     * Creates an {@link ArithPostfixParser} over {@code expr}.
      * @param expr
      *            the arithmetic expression to parse
      * @throws NullPointerException if expr is null
      * @throws IllegalArgumentException if expr is no a valid arithmetic
      *         expression.
      */
-    public ArithPostFixParser(String expr) {
+    public ArithPostfixParser(String expr) {
         if (expr == null) {
             throw new NullPointerException("The expression must be non-null.");
         }
-        if (!isParseable(expr)) {
+        if (!isParsable(expr)) {
             throw new IllegalArgumentException("The string \"" + expr
-                    + "\" is not a valid ArithPostFix expression.");
+                    + "\" is not a valid ArithPostfix expression.");
         }
         this.expr = expr;
         this.tokenizer = new Scanner(this.expr);
@@ -151,14 +146,14 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
     }
 
     private void getNextParsable() {
-        // If the next parseable has not been given, do nothing.
+        // If the next parsable has not been given, do nothing.
         if (nextOperand != null || nextOperator != null) {
             return;
         }
         // If the token is an int, generate an integer operand
         if (tokenizer.hasNextInt()) {
             int token = tokenizer.nextInt();
-            nextOperand = new Operand<Integer>(token);
+            nextOperand = new Operand<>(token);
         } else if (tokenizer.hasNext()) {
             // Otherwise return the associated operator
             String token = tokenizer.next();
@@ -185,7 +180,7 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
      */
     @Override
     public Operand<Integer> nextOperand() {
-        if (nextType() != PostFixParser.Type.OPERAND) {
+        if (nextType() != PostfixParser.Type.OPERAND) {
             throw new IllegalStateException("Operand could not be parsed.");
         }
         Operand<Integer> temp = nextOperand;
@@ -198,7 +193,7 @@ public class ArithPostFixParser implements PostFixParser<Integer> {
      */
     @Override
     public Operator<Integer> nextOperator() {
-        if (nextType() != PostFixParser.Type.OPERATOR) {
+        if (nextType() != PostfixParser.Type.OPERATOR) {
             throw new IllegalStateException("Operator could not be parsed.");
         }
         Operator<Integer> temp = nextOperator;

@@ -1,9 +1,9 @@
 # `DSp3Postfix`
 
-# Post-Fix Evaluator
+# Postfix Evaluator
 
 ## Overview
-For this assignment, you will be implementing a Post Fix Evaluator to perform basic arithmetic.
+For this assignment, you will be implementing a Postfix Evaluator to perform basic arithmetic.
 This assignment is based off material in Chapter 3 and Chapter 4 in the Java Software Structures
 textbook by Lewis & Chase.
 
@@ -33,7 +33,7 @@ division on two integers
 
 **language.arith.NegateOperator** - A unary operator for performing negation on a single integer
 
-**evaluator.arith.ArithPostFixEvaluator** - An evaluator for simple arithmetic post fix notation...this is the big challenge...maybe
+**evaluator.arith.ArithPostfixEvaluator** - An evaluator for simple arithmetic postfix notation...this is the big challenge...maybe
 
 ### Test files
 In the test folder, you are provided with several JUnit test cases that will help you keep on track while completing this assignment.
@@ -48,11 +48,11 @@ It is not important that you understand how these classes are implemented, but i
 In particular, it is highly recommended that you spend some time reading the Javadoc in each of the following classes:
 
 **stack.StackInterface**<br>
-**parser.arith.PostFixParser**<br>
+**parser.arith.PostfixParser**<br>
 **language.Operator**<br>
 **language.Operand**<br>
 **language.BinaryOperator**<br>
-**evaluator.PostFixEvaluator**<br>
+**evaluator.PostfixEvaluator**<br>
 
 
 ## Part One: Getting Started
@@ -71,7 +71,7 @@ A module is a uniquely named, reusable group of related packages, as well as res
 If you go to the Project Settings window you will see Module Settings, where you can find out about module dependencies.
 
 If you are missing any of the above or errors are present in the project, seek help immediately, so you can get started 
-on the project right away. The project may start with a warning in **evaluator.arith.ArithPostFixEvaluator**, this is okay.
+on the project right away. The project may start with a warning in **evaluator.arith.ArithPostfixEvaluator**, this is okay.
 
 ## Part Two: Implementing LinkedStack
 You need to implement a basic stack data structure using a linked list data type internally to allow for an unbounded structure.
@@ -109,9 +109,9 @@ Negation is represented by the `!` and flips the sign of the `Operand`. For exam
 
 ## Part Four: Implement a Postfix Arithmetic Evaluator
 Now that we have a stack and operators defined, it is time to create an evaluator.
-Open up the **evaluator.arith.ArithPostFixEvaluator** class and you will see four TODO comments.
+Open up the **evaluator.arith.ArithPostfixEvaluator** class and you will see four TODO comments.
 
-Before starting, check out the **evaluator.arith.ArithPostFixEvaluatorTest** class to see examples of how the evaluator
+Before starting, check out the **evaluator.arith.ArithPostfixEvaluatorTest** class to see examples of how the evaluator
 is expected to be called and the results that are expected to be returned.
 
 First, you want to initialize the stack you will be using with your implementation.
@@ -149,14 +149,14 @@ Write an `ExponentOperatorTest` class similar to that of the `PlusOperatorTest` 
 Try to think of additional scenarios you would like to test and write test cases for those scenarios.
 
 Implement an `ExponentOperator` class that is similar to your `PlusOperator` class.
-Think about what the two operands represent and how `performOperation` would work for this class (anyone thinking about Math.pow?).
+Think about what the two operands represent and how `performOperation` would work for this class.
 
-### Part Two: Write an ArthInFixEvaluatorClass
+### Part Two: Write an ArthInfixEvaluatorClass
 
-Write an `ArthInFixEvaluatorTest` class modeled after `ArthPostFixEvaluatorTest` class.
+Write an `ArthInfixEvaluatorTest` class modeled after `ArthPostfixEvaluatorTest` class.
 Try to think of additional scenarios you would like to test and write test cases for those scenarios.
 
-Implement an `ArthInFixEvaluator` class that is similar to your `ArthPostFixEvaluator` class.
+Implement an `ArthInfixEvaluator` class that is similar to your `ArthPostfixEvaluator` class.
 
 In your algorithm, use two stacks. One stack holds Operands, the other holds Operators. When you encounter an Operand,
 put it on the Operand stack. When you encounter an Operator, push it on the Operator stack if it has higher precedence
@@ -207,13 +207,13 @@ Expression: 3 * 4 ^ 2 + 5
 
 ## Additional Notes
 
-### Using the ArithPostFixParser
+### Using the ArithPostfixParser
 
 You have been provided with a class for parsing arithmetic postfix expressions. It is not important that you understand
 how it is implemented, but it is important that you understand what the interface provides for you.
-Read over the comments in the **parser.PostFixParser** interface carefully.
+Read over the comments in the **parser.PostfixParser** interface carefully.
 
-A short example of its use can be found in **parser.arith.ArithPostFixParserExample**
+A short example of its use can be found in **parser.arith.ArithPostfixParserExample**
 
 ### Collaboration and Resources
 This is a solo project, and you should write your own code. That said, feel free to discuss the project with your classmates,
@@ -235,12 +235,13 @@ For example, when you implement `MultOperator`, you could write a driver similar
 ```java
 public static void main(String[] args){
   Operator<Integer> multOp = new MultOperator();
-  Operand<Integer> operand0 = new Operand<Integer>(5);
-  Operand<Integer> operand1 = new Operand<Integer>(6);
+  Operand<Integer> operand0 = new Operand<>(5);
+  Operand<Integer> operand1 = new Operand<>(6);
   multOp.setOperand(0, operand0);
   multOp.setOperand(1, operand1);
   Operand<Integer> result = multOp.performOperation();
   System.out.println(result.getValue());
+  System.out.println("Expected: 30");
 }
 ```
 
@@ -249,27 +250,25 @@ This might look something like the following:
 
 ```java
 public static void main(String[] args){
-
    Scanner s = new Scanner(System.in);
-   PostFixEvaluator<Integer> evaluator = new ArithPostFixEvaluator();
-   System.out.println(“Welcome to the Post Fix Evaluator 5000 SUX”);
-   System.out.println(“Please enter a post fix expression to be evaluated:”);
+   Evaluator<Integer> evaluator = new ArithPostfixEvaluator();
+   System.out.println("Welcome to the Postfix Evaluator 5000");
+   System.out.println("Please enter a postfix expression to be evaluated:");
    String expr = s.nextLine();
-   // Sometimes I get an exception… Maybe I should use a try/catch block.
+   // Sometimes I get an exception. Maybe I should use a try/catch block?
    Integer result = evaluator.evaluate(expr);
-   System.out.println(“The expression evaluated to: “ + result);
-   // Maybe I could ask user if they want to enter another expression and loop
-
+   System.out.println("The expression evaluated to: " + result);
+   // Maybe I could ask user if they want to enter another expression and loop?
 }
 ```
 
 ### What is this enum Type?
-In the `ArithPostFixEvaluator` code I provided for you, I wrote a switch statement that has two cases: `OPERAND` and `OPERATOR`.
-If you decide to dig to see what these are, you will find the following:
+In the `ArithPostfixEvaluator` code I provided for you, I wrote a switch statement that has two cases: `OPERAND` and `OPERATOR`.
+If you take a look, you will find the following:
 
 ```java
 	/**
-	 * A {@link PostFixParser} can produce different types.
+	 * A {@link PostfixParser} can produce different types.
 	 * @author jcollard, jddevaug
 	 */
 	enum Type {
@@ -286,11 +285,11 @@ If you decide to dig to see what these are, you will find the following:
 	}
 ```
 
-The `PostFixParser` can produce two different types, `Operators` and `Operands`. This class helps facilitate that information
+The `PostfixParser` can produce two different types, `Operators` and `Operands`. This class helps facilitate that information
 to the user in a more readable (and modular) way than a boolean would. The `nextType` method returns one of these two values
-indicating which method you should call next in your evaluator.
+indicating what you should do next in your evaluator.
 
-Luckily, most of this code is written for you so you don’t have to worry too much about it.
+Luckily, most of this code is written for you, so you don’t have to sweat it.
 For more information about enumerated types, check out the following [link](http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html).
 
 

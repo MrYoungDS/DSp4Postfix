@@ -4,7 +4,7 @@ import language.BinaryOperator;
 import language.Operand;
 
 /**
- * The {@link DivOperator} is an operator that performs division on two
+ * The {@link DivOperator} is an operator that performs integer division on two
  * integers.
  * @author jcollard, jddevaug
  */

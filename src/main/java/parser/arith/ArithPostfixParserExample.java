@@ -2,10 +2,10 @@ package parser.arith;
 
 import language.Operand;
 import language.Operator;
-import parser.PostFixParser;
-import parser.PostFixParser.Type;
+import parser.PostfixParser;
+import parser.PostfixParser.Type;
 
-public class ArithPostFixParserExample {
+public class ArithPostfixParserExample {
 
     // TONOTDO: please do not edit this class
 
@@ -15,7 +15,7 @@ public class ArithPostFixParserExample {
      */
     @SuppressWarnings("unused")
     public static void main(String[] args) {
-        PostFixParser<Integer> parser = new ArithPostFixParser("1 2 +");
+        PostfixParser<Integer> parser = new ArithPostfixParser("1 2 +");
 
         boolean next = parser.hasNext(); // Returns true because there are more elements to be consumed
         Type nextP = parser.nextType(); // Returns OPERAND because the next element is an operand

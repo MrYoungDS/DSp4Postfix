@@ -4,16 +4,16 @@ import language.Operand;
 import language.Operator;
 
 /**
- * A {@link PostFixParser} is used to parse post fix expressions made up of operands and operators.
+ * A {@link PostfixParser} is used to parse postfix expressions made up of operands and operators.
  * @author jcollard, jddevaug
  * @param <T> - the type of data held in an operand
  */
-public interface PostFixParser<T> {
+public interface PostfixParser<T> {
 
     // TONOTDO: please do not edit this class
 
     /**
-     * A {@link PostFixParser} can produce different types.
+     * A {@link PostfixParser} can produce different types.
      * @author jcollard, jddevaug
      *
      */

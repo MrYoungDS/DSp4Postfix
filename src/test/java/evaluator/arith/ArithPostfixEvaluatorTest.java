@@ -1,6 +1,6 @@
 package evaluator.arith;
 
-import evaluator.IllegalPostFixExpressionException;
+import evaluator.IllegalPostfixExpressionException;
 import evaluator.Evaluator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ArithPostFixEvaluatorTest {
+public class ArithPostfixEvaluatorTest {
 
     private Evaluator<Integer> evaluator;
 
     @BeforeEach
     public void setup() {
-        evaluator = new ArithPostFixEvaluator();
+        evaluator = new ArithPostfixEvaluator();
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ArithPostFixEvaluatorTest {
 
     @Test
     public void testInvalidExpression() {
-        assertThrows(IllegalPostFixExpressionException.class,
+        assertThrows(IllegalPostfixExpressionException.class,
                 () -> evaluator.evaluate("1 2"));
     }
 }
