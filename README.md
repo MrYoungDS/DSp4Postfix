@@ -1,6 +1,4 @@
-# `DSp3Postfix`
-
-# Postfix Evaluator
+# `DSp4Postfix` Postfix Evaluator
 
 ## Overview
 For this assignment, you will be implementing a Postfix Evaluator to perform basic arithmetic.
@@ -24,16 +22,18 @@ Each of the files listed here have unit tests associated with them and are requi
 you are allowed to implement them in any way you would like. However, keep in mind there are helper classes
 that should make your job easier.
 
-**stack.LinkedStack<T>** - A stack data structure that MUST use a node-based structure to allow for unbounded stack size.
-Note, you may not use the built-in List types provided by the Java API. The Node class has been created for you, please
-do not modify it.
+`stack.LinkedStack<T>` A stack data structure that will use a nodes to allow for unbounded stack size.
+As expected, you may not use the built-in `List` types provided by the Java API.
+The `Node` class has been created for you to use with your stack, please do not modify it.
+We have our first taste of genericity with the type parameter `T`. We will be using the stack primarily with `Integer`
+objects, but it should work for any object type in place of `T`, such as with `String` objects.
 
-**language.arith.SubOperator / MultOperator / DivOperator** - Binary operators for performing subtraction / multiplication /
+`language.arith.SubOperator / MultOperator / DivOperator` Binary operators for performing subtraction / multiplication /
 division on two integers
 
-**language.arith.NegateOperator** - A unary operator for performing negation on a single integer
+`language.arith.NegateOperator` A unary operator for performing negation on a single integer
 
-**evaluator.arith.ArithPostfixEvaluator** - An evaluator for simple arithmetic postfix notation...this is the big challenge...maybe
+`evaluator.arith.ArithPostfixEvaluator` An evaluator for simple arithmetic postfix notation...this is the challenging part
 
 ### Test files
 In the test folder, you are provided with several JUnit test cases that will help you keep on track while completing this assignment.
@@ -44,15 +44,15 @@ proceed with care, but in general you are welcome to add any additional tests, o
 Several classes / interfaces in this project have been completed for you. The places where you need to provide code are
 marked with a TODO comment, and the classes / interfaces that you should not modify are marked with a TONOTDO comment.
 
-It is not important that you understand how these classes are implemented, but it is important that you understand what these classes offer.
+You do not need to understand how these classes are implemented, but it is important that you understand what these classes offer.
 In particular, it is highly recommended that you spend some time reading the Javadoc in each of the following classes:
 
-**stack.StackInterface**<br>
-**parser.arith.PostfixParser**<br>
-**language.Operator**<br>
-**language.Operand**<br>
-**language.BinaryOperator**<br>
-**evaluator.PostfixEvaluator**<br>
+ * `stack.StackInterface`
+ * `parser.PostfixParser`
+ * `language.Operator`
+ * `language.Operand`
+ * `language.BinaryOperator`
+ * `evaluator.PostfixEvaluator`
 
 
 ## Part One: Getting Started
@@ -71,17 +71,17 @@ A module is a uniquely named, reusable group of related packages, as well as res
 If you go to the Project Settings window you will see Module Settings, where you can find out about module dependencies.
 
 If you are missing any of the above or errors are present in the project, seek help immediately, so you can get started 
-on the project right away. The project may start with a warning in **evaluator.arith.ArithPostfixEvaluator**, this is okay.
+on the project right away.
 
 ## Part Two: Implementing LinkedStack
-You need to implement a basic stack data structure using a linked list data type internally to allow for an unbounded structure.
-Start by reading the comments in the `StackInterface` interface (in the `main | java | stack` package).
-It will provide you with some direction on what each method needs to do. Also, it will be helpful to review Chapter 3
+You need to implement a basic stack data structure using a linked list data type to allow for an unbounded structure.
+Start by reading the comments in the `StackInterface` interface (in the `main.java.stack` package).
+It will provide you with some direction on what each method needs to do. It may also be helpful to review Chapter 3
 to see how a stack works and Chapter 4 to see how to implement a stack using a linked structure.
 
 **Hint:** Much of this will be familiar from our work on the MyLinkedList project.
 
-The tests associated with the `LinkedStack` class, **stack.LinkedStackTest** are in the test folder.
+The tests associated with the `LinkedStack` class, found in `stack.LinkedStackTest` are in the test folder.
 You will want to make sure your implementation passes all the tests provided. Try and think of additional tests that might trip you up.
 Did you meet all the requirements specified by the interface?
 
@@ -90,8 +90,8 @@ Before you can even attempt to create a postfix evaluator, you will need to defi
 For this assignment, you are required to support addition, subtraction, multiplication, division and negation of integers.
 To help facilitate this, you have been provided with an `Operator<T>` interface. Take a moment to review the interface.
 
-Now run the **language.arith.PlusOperatorTest** test. All the tests pass! Right (please say yes)?
-Go ahead and open up the `PlusOperator` class, and you will see an implementation. Review this implementation,
+Now run the `language.arith.PlusOperatorTest` test. All the tests pass...right? (Please say yes.)
+Next, open the `PlusOperator` class, and you will see an implementation. Review this implementation,
 then complete the `SubOperator`, `DivOperator`, and `MultOperator` classes. Each time you implement something,
 be sure to run the associated tests to make sure everything is working correctly.
 
@@ -109,9 +109,9 @@ Negation is represented by the `!` and flips the sign of the `Operand`. For exam
 
 ## Part Four: Implement a Postfix Arithmetic Evaluator
 Now that we have a stack and operators defined, it is time to create an evaluator.
-Open up the **evaluator.arith.ArithPostfixEvaluator** class and you will see four TODO comments.
+Open up the `evaluator.arith.ArithPostfixEvaluator` class, and you will see four TODO comments.
 
-Before starting, check out the **evaluator.arith.ArithPostfixEvaluatorTest** class to see examples of how the evaluator
+Before starting, check out the `evaluator.arith.ArithPostfixEvaluatorTest` class to see examples of how the evaluator
 is expected to be called and the results that are expected to be returned.
 
 First, you want to initialize the stack you will be using with your implementation.
@@ -123,15 +123,13 @@ Third, determine what you will do when you see an `Operator`.
 Finally, determine what you will return.
 
 ## Part Five: Commit Project
-When you have finished your solution and are ready to submit, make your final commit and push everything up to GitHub.
-
+When you have finished your solution and are ready to submit, make your final commit and push everything up to GitHub Classroom.
 
 ## Bonus: Infix Expression Evaluator
-
 Implement the following algorithm for the evaluation of arithmetic infix expressions.
 
 Each operator has a precedence. The + and - operators have the lowest precedence, * and / have a higher (and equal) precedence,
-and ^ (which denotes “ raising to a power” in this project) has the highest. For example,
+and ^ (which denotes "raising to a power" in this project) has the highest. For example,
 
 3 * 4 ^ 2 + 5
 
@@ -143,8 +141,7 @@ with a value of 53.
 
 If you are going to tackle the bonus you will likely need to implement a robust test suite.
 
-### Part One: Write an ExponentOperator class
-
+### Bonus Part One: Write an ExponentOperator class
 Write an `ExponentOperatorTest` class similar to that of the `PlusOperatorTest` class.
 Try to think of additional scenarios you would like to test and write test cases for those scenarios.
 
@@ -152,7 +149,6 @@ Implement an `ExponentOperator` class that is similar to your `PlusOperator` cla
 Think about what the two operands represent and how `performOperation` would work for this class.
 
 ### Part Two: Write an ArthInfixEvaluatorClass
-
 Write an `ArthInfixEvaluatorTest` class modeled after `ArthPostfixEvaluatorTest` class.
 Try to think of additional scenarios you would like to test and write test cases for those scenarios.
 
@@ -208,12 +204,11 @@ Expression: 3 * 4 ^ 2 + 5
 ## Additional Notes
 
 ### Using the ArithPostfixParser
-
 You have been provided with a class for parsing arithmetic postfix expressions. It is not important that you understand
 how it is implemented, but it is important that you understand what the interface provides for you.
-Read over the comments in the **parser.PostfixParser** interface carefully.
+Read over the comments in the `parser.PostfixParser` interface carefully.
 
-A short example of its use can be found in **parser.arith.ArithPostfixParserExample**
+A short example of its use can be found in `parser.arith.ArithPostfixParserExample`
 
 ### Collaboration and Resources
 This is a solo project, and you should write your own code. That said, feel free to discuss the project with your classmates,
@@ -223,8 +218,8 @@ Read through the book and see if you can piece together the puzzle yourself. I a
 
 ### Material on Exceptions
 For this assignment, you will need to make use of exceptional situations. For a quick reference on how to throw an exception,
-check out **language.BinaryOperator** this is an abstract class that meets many of the requirements for the **language.Operator** interface.
-You will notice that its `setOperand` method has several exceptional states and throws the exceptions detailed in the **language.Operator** interface.
+check out `language.BinaryOperator`, an abstract class that meets many of the requirements of the `language.Operator` interface.
+You will notice that its `setOperand` method has several exceptional states and throws the exceptions detailed in `language.Operator`.
 Also, there is material available in the book in chapter 3 (focus on section 3.6).
 
 ### Where is the Driver Class?
@@ -245,7 +240,7 @@ public static void main(String[] args){
 }
 ```
 
-Consider also writing a driver class that reads in post-fix expressions from the user and calculates them.
+Consider also writing a driver class that reads in postfix expressions from the user and calculates them.
 This might look something like the following:
 
 ```java
@@ -263,7 +258,7 @@ public static void main(String[] args){
 ```
 
 ### What is this enum Type?
-In the `ArithPostfixEvaluator` code I provided for you, I wrote a switch statement that has two cases: `OPERAND` and `OPERATOR`.
+In the `ArithPostfixEvaluator` code provided for you, there is a switch statement that has two cases: `OPERAND` and `OPERATOR`.
 If you take a look, you will find the following:
 
 ```java
@@ -291,6 +286,5 @@ indicating what you should do next in your evaluator.
 
 Luckily, most of this code is written for you, so you don’t have to sweat it.
 For more information about enumerated types, check out the following [link](http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html).
-
 
 

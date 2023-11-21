@@ -72,6 +72,24 @@ public class ArithPostfixEvaluatorTest {
     }
 
     @Test
+    public void testEvaluateComplex() {
+        Integer result = evaluator.evaluate("3 4 * 2 5 * +");
+        assertEquals(Integer.valueOf(22), result);
+
+        result = evaluator.evaluate("3 4 2 + * 5 *");
+        assertEquals(Integer.valueOf(90), result);
+
+        result = evaluator.evaluate("2 3 1 * + 9 -");
+        assertEquals(Integer.valueOf(-4), result);
+
+        result = evaluator.evaluate("5 1 2 + 4 * ! + 3 -");
+        assertEquals(Integer.valueOf(-10), result);
+
+        result = evaluator.evaluate("12 3 ! + 2 * 4 2 - 3 5 ! + * -");
+        assertEquals(Integer.valueOf(22), result);
+    }
+
+    @Test
     public void testInvalidExpression() {
         assertThrows(IllegalPostfixExpressionException.class,
                 () -> evaluator.evaluate("1 2"));
