@@ -148,7 +148,15 @@ Try to think of additional scenarios you would like to test and write test cases
 Implement an `ExponentOperator` class that is similar to your `PlusOperator` class.
 Think about what the two operands represent and how `performOperation` would work for this class.
 
-### Part Two: Write an ArthInfixEvaluatorClass
+### Bonus Part Two: Add priorities and include exponent parsing
+You will want to modify the `Operator` interface to include a `getPriority` method, and then add that
+method to the operators that we have implemented. You may assume that the negation operator will not be
+included in our infix expressions.
+
+You can modify the `ArithPostfixEvaluator` class to include exponentiation, or copy it over to a new
+`ArithInfixEvaluator` class that has an option for the `ExponentOperator` in the `operators` hash map.
+
+### Bonus Part Three: Write an ArithInfixEvaluatorClass
 Write an `ArthInfixEvaluatorTest` class modeled after `ArthPostfixEvaluatorTest` class.
 Try to think of additional scenarios you would like to test and write test cases for those scenarios.
 
@@ -190,16 +198,13 @@ Expression: 3 * 4 ^ 2 + 5
 7) Remaining expression:           5           Operand stack               Operator stack
                                                       48                           +
 
-
 8) Remaining expression:                       Operand stack               Operator stack
                                                       5                            +
                                                       48
                                         
-
 9) Remaining expression:                       Operand stack               Operator stack
                                                       53
 ```
-
 
 ## Additional Notes
 

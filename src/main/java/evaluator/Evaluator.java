@@ -13,7 +13,7 @@ public interface Evaluator<T> {
      * Evaluates the post fix expression and returns a value.
      * @param expr the expression to be evaluated
      * @return the value of evaluating expr
-     * @throws IllegalPostFixExpressionException if the expression is not a valid post fix expression
+     * @throws IllegalPostfixExpressionException if the expression is not a valid post fix expression
      */
     public T evaluate(String expr);
 }
