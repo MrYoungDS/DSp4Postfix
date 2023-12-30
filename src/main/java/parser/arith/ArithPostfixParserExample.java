@@ -24,7 +24,7 @@ public class ArithPostfixParserExample {
         nextP = parser.nextType(); // Returns OPERAND because the next element is an operand
         Operand<Integer> o1 = parser.nextOperand(); // Returns an operand wrapping 2
         next = parser.hasNext(); // Returns true because there are more elements to be consumed
-        nextP = parser.nextType(); // Returns OPERATOR because the next element is an operand
+        nextP = parser.nextType(); // Returns OPERATOR because the next element is an operator
         Operator<Integer> operator = parser.nextOperator(); // Returns the PlusOperator
         next = parser.hasNext(); // Returns false because all the elements have been consumed
     }

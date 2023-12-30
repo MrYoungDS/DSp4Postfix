@@ -15,7 +15,7 @@ import parser.PostfixParser;
 
 /**
  * <p>
- * An {@code ArithPostFixParser} is a postfix parser for arithmetic
+ * An {@code ArithPostfixParser} is a postfix parser for arithmetic
  * expressions.
  * </p>
  * <p>
@@ -25,7 +25,7 @@ import parser.PostfixParser;
  *
  * <pre>
  * Example:
- *  PostFixParser<Integer> parser = new ArithPostFixParser("1 2 +");
+ *  PostfixParser<Integer> parser = new ArithPostfixParser("1 2 +");
  *
  *  boolean next = parser.hasNext(); // Returns true because there are more elements to be consumed
  *  Type nextP = parser.nextType(); // Returns OPERAND because the next element is an operand
@@ -34,7 +34,7 @@ import parser.PostfixParser;
  *  nextP = parser.nextType(); // Returns OPERAND because the next element is an operand
  *  Operand<Integer> o1 = parser.nextOperand(); // Returns an operand wrapping 2
  *  next = parser.hasNext(); // Returns true because there are more elements to be consumed
- *  nextP = parser.nextType(); // Returns OPERATOR because the next element is an operand
+ *  nextP = parser.nextType(); // Returns OPERATOR because the next element is an operator
  *  Operator<Integer> operator = parser.nextOperator(); // Returns the PlusOperator
  *  next = parser.hasNext(); // Returns false because all of the elements have been consumed
  * </pre>
