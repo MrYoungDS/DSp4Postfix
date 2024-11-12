@@ -6,15 +6,12 @@ package stack;
  */
 class Node<T>
 {
-
     // TONOTDO: please do not edit this class
     // ...well, you can change the variable names if you like
-
     public T element;
     public Node<T> next;
 
-    public Node(T elem)
-    {
+    public Node(T elem) {
         element = elem;
         next = null;
     }

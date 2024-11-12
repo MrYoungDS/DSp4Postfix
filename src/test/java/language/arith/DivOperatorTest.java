@@ -19,8 +19,8 @@ class DivOperatorTest {
     @BeforeEach
     public void setup() {
         operator = new DivOperator();
-        op0 = new Operand<Integer>(5);
-        op1 = new Operand<Integer>(7);
+        op0 = new Operand<>(5);
+        op1 = new Operand<>(7);
     }
 
     @Test
@@ -30,37 +30,58 @@ class DivOperatorTest {
 
         Operand<Integer> result = operator.performOperation();
         int value = result.getValue();
-        assertEquals(0,  value, "Operator applied to 5 and 7 should produce 0.");
+        assertEquals(0,  value,
+                "Operator applied to 5 and 7 should produce 0.");
     }
 
     @Test
     public void testPerformOperationPositiveNumbers() {
-        operator.setOperand(0, new Operand<Integer>(12));
-        operator.setOperand(1, new Operand<Integer>(4));
+        operator.setOperand(0, new Operand<>(12));
+        operator.setOperand(1, new Operand<>(4));
 
         Operand<Integer> result = operator.performOperation();
         int value = result.getValue();
-        assertEquals(3,  value, "Operator applied to 12 and 4 should produce 3.");
+        assertEquals(3,  value,
+                "Operator applied to 12 and 4 should produce 3.");
     }
 
     @Test
     public void testPerformOperationNegativeNumbers() {
-        operator.setOperand(0, new Operand<Integer>(-20));
-        operator.setOperand(1, new Operand<Integer>(-5));
+        operator.setOperand(0, new Operand<>(-20));
+        operator.setOperand(1, new Operand<>(-5));
 
         Operand<Integer> result = operator.performOperation();
         int value = result.getValue();
-        assertEquals(4,  value, "Operator applied to -20 and -5 should produce 4.");
+        assertEquals(4,  value,
+                "Operator applied to -20 and -5 should produce 4.");
     }
 
     @Test
     public void testPerformOperationNegativeResult() {
-        operator.setOperand(0, new Operand<Integer>(-20));
-        operator.setOperand(1, new Operand<Integer>(5));
+        operator.setOperand(0, new Operand<>(-20));
+        operator.setOperand(1, new Operand<>(5));
 
         Operand<Integer> result = operator.performOperation();
         int value = result.getValue();
-        assertEquals(-4,  value, "Operator applied to -20 and 5 should produce -4.");
+        assertEquals(-4,  value,
+                "Operator applied to -20 and 5 should produce -4.");
+    }
+
+    @Test
+    public void testPerformOperationZeroNumerator() {
+        operator.setOperand(0, new Operand<>(0));
+        operator.setOperand(1, new Operand<>(5));
+
+        Operand<Integer> result = operator.performOperation();
+        int value = result.getValue();
+        assertEquals(0,  value,
+                "Operator applied to 0 and 5 should produce 0.");
+    }
+
+    @Test
+    public void testGetNumberOfArguments() {
+        assertEquals(operator.getNumberOfArguments(), 2,
+                "Binary operator should have 2 arguments.");
     }
 
     @Test
@@ -68,11 +89,9 @@ class DivOperatorTest {
         assertThrows(IllegalArgumentException.class,
                 () -> operator.setOperand(2, op0),
                 "Binary operator should not except input to position 2");
-    }
-
-    @Test
-    public void testGetNumberOfArguments() {
-        assertEquals(operator.getNumberOfArguments(), 2, "Binary operator should have 2 arguments.");
+        assertThrows(IllegalArgumentException.class,
+                () -> operator.setOperand(-1, op0),
+                "Binary operator should not except input to position -1");
     }
 
     @Test

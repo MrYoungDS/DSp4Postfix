@@ -121,4 +121,11 @@ class LinkedStackTest {
                 () -> intStack.top(),
                 "Examining the top of an empty stack should throw underflow.");
     }
+
+    @Test
+    public void testNullPointer() {
+        assertThrows(NullPointerException.class,
+                () -> intStack.push(null),
+                "Pushing a null value should throw an exception.");
+    }
 }

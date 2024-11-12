@@ -48,7 +48,8 @@ class PlusOperatorTest {
 
     @Test
     public void testGetNumberOfArguments() {
-        assertEquals(operator1.getNumberOfArguments(), 2, "Binary operator should have 2 arguments.");
+        assertEquals(operator1.getNumberOfArguments(), 2,
+                "Binary operator should have 2 arguments.");
     }
 
     @Test
@@ -56,6 +57,9 @@ class PlusOperatorTest {
         assertThrows(IllegalArgumentException.class,
                 () -> operator1.setOperand(2, op0),
                 "Binary operator should not except input to position 2");
+        assertThrows(IllegalArgumentException.class,
+                () -> operator1.setOperand(-1, op0),
+                "Binary operator should not except input to position -1");
     }
 
     @Test

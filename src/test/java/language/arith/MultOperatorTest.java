@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class MultOperatorTest {
-    Operator<Integer> operator;
+    Operator<Integer> operator1;
     Operand<Integer> op0;
     Operand<Integer> op1;
 
@@ -18,40 +18,76 @@ class MultOperatorTest {
      */
     @BeforeEach
     public void setup() {
-        operator = new MultOperator();
-        op0 = new Operand<Integer>(5);
-        op1 = new Operand<Integer>(7);
+        operator1 = new MultOperator();
+        op0 = new Operand<>(5);
+        op1 = new Operand<>(7);
     }
 
     @Test
     public void testPerformOperation() {
-        operator.setOperand(0, op0);
-        operator.setOperand(1, op1);
+        operator1.setOperand(0, op0);
+        operator1.setOperand(1, op1);
 
-        Operand<Integer> result = operator.performOperation();
+        Operand<Integer> result = operator1.performOperation();
         int value = result.getValue();
-        assertEquals(5 * 7,  value, "Operator applied to 5 and 7 should produce 35.");
+        assertEquals(35,  value, "Operator applied to 5 and 7 should produce 35.");
     }
 
     @Test
-    public void testIllegalStateException() {
-        operator.setOperand(0, new Operand<Integer>(5));
-        assertThrows(IllegalStateException.class,
-                () -> operator.setOperand(0, new Operand<Integer>(12)),
-                "Operator should not allow the same operand position to be set more than once");
+    public void testPerformOperationNegative() {
+        operator1.setOperand(0, new Operand<>(5));
+        operator1.setOperand(1, new Operand<>(-7));
+
+        Operand<Integer> result = operator1.performOperation();
+        int value = result.getValue();
+        assertEquals(-35, value, "Operator applied to 5 and 7 should produce -35.");
     }
 
     @Test
-    public void testIllegalStateExceptionPerform() {
-        assertThrows(IllegalStateException.class,
-                () -> operator.performOperation(),
-                "Operator should not compute when all arguments have not been set.");
+    public void testPerformOperationZero() {
+        operator1.setOperand(0, new Operand<>(5));
+        operator1.setOperand(1, new Operand<>(0));
+
+        Operand<Integer> result = operator1.performOperation();
+        int value = result.getValue();
+        assertEquals(0, value, "Operator applied to 5 and 7 should produce 0.");
+    }
+
+    @Test
+    public void testGetNumberOfArguments() {
+        assertEquals(operator1.getNumberOfArguments(), 2,
+                "Binary operator should have 2 arguments.");
+    }
+
+    @Test
+    public void testIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> operator1.setOperand(2, op0),
+                "Binary operator should not except input to position 2");
+        assertThrows(IllegalArgumentException.class,
+                () -> operator1.setOperand(-1, op0),
+                "Binary operator should not except input to position -1");
     }
 
     @Test
     public void testNullArgumentException() {
         assertThrows(NullPointerException.class,
-                () -> operator.setOperand(0, null),
+                () -> operator1.setOperand(0, null),
                 "Operator should not allow null arguments");
+    }
+
+    @Test
+    public void testIllegalStateException() {
+        operator1.setOperand(0, op0);
+        assertThrows(IllegalStateException.class,
+                () -> operator1.setOperand(0, op0),
+                "Operator should not allow position 0 to be set more than once");
+    }
+
+    @Test
+    public void testIllegalStateExceptionPerform() {
+        assertThrows(IllegalStateException.class,
+                () -> operator1.performOperation(),
+                "Operator should not compute when all arguments have not been set.");
     }
 }
